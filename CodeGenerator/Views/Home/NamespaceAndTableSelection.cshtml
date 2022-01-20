@@ -1,0 +1,58 @@
+﻿@model CodeGenerator.Models.TableViewModel;
+@{
+    ViewData["Title"] = "NamespaceAndTableSelection";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DDD基础代码生成器</title>
+    <link rel="stylesheet" href="~/css/NamespaceAndTableSelection.css"/>
+</head>
+
+<h1 class="text-center">Classes选择</h1>
+<p class="text-center">选择将为哪些类生成文件并指明命名空间</p>
+<form method="post" asp-action="NamespaceAndTableSelection" asp-controller="Home">
+    <div class="col-md-12 mt-3">
+        <input class="form-control" type="text" name="Namespace" placeholder="Namespace" required>
+        <div class="valid-feedback">无效的命名空间</div>
+        <div class="invalid-feedback">必须填写命名空间</div>
+    </div>
+     <div class="col-md-12 mt-3 tableFixHead">
+        <table class="table">
+            <thead style="background-color:lightgray">
+                <tr>
+                    <th style="background-color: lightgray;" scope="col">表</th>
+                    <th style="background-color: lightgray;" scope="col">生成文件?</th>
+                </tr>
+            </thead>
+            <tbody>
+                    @for(var i = 0; i < Model.Tables.Count(); i++)
+                    {
+                        <tr>
+                            <input asp-for=@Model.Tables[i].Name hidden="hidden"/>
+                            <th style="font-weight:400">@Model.Tables[i].Name</th>
+                            <th style="text-align:center">
+                                @if(Model.Tables[i].GenerateFile == false)
+                                {
+                                    <input asp-for=@Model.Tables[i].GenerateFile type="checkbox"/>
+                                }
+                                else
+                                {
+                                    <input asp-for=@Model.Tables[i].GenerateFile type="checkbox" checked="checked"/>
+                                }
+                            </th>
+                        </tr>
+                    }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 row mt-2">
+        <div class="col-md-6">
+            <button id="voltarTelaInicial" type="button" onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">返回</button>
+        </div>
+        <div class="col-md-6" style="display:flex; justify-content:end;">
+            <button id="GenerateFilesDownload" type="submit" class="btn btn-primary">生成文件</button>
+        </div>
+    </div>
+</form>
+

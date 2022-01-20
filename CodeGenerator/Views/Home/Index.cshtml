@@ -1,0 +1,119 @@
+﻿@model CodeGenerator.Models.TableViewModel;
+@{
+ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">DDD基础代码生成器</h1>
+    <p>DDD 设计模式中的自动代码生成程序.</p>
+    <br />
+    <p>加载包含要生成的表的 .csv 文件.</p>
+    <div>
+        <div class="form-body">
+            <div class="row">
+                <div class="form-holder">
+                    <div class="form-content">
+                        <div class="form-items">
+                            <form asp-action="Index" enctype="multipart/form-data" asp-controller="Home" method="post"
+                                class="needs-validation" novalidate>
+                                <div class="row col-md-12 mt-1">
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="file" name="file" placeholder="数据库表名文件"
+                                            required>
+                                        <div class="invalid-feedback">无效的文件</div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button id="carregarTablesButton" type="submit"
+                                            class="btn btn-primary">上传csv文件加载表</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-12 mt-2">
+                <div class="col-10">
+                    <label class="visually-hidden" for="connstr">SqlServer连接字符串</label>
+                    <div class="input-group">
+                        <div class="input-group-text">SqlServer连接字符串:</div>
+                        <input type="text" class="form-control" id="connstr" placeholder="SqlServer连接字符串">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-primary mb-3" id="loaddbtable">直接从数据库加载表</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Opjs
+{
+    <script>
+        $(function(){
+
+             $("#loaddbtable").click(function(){
+             if(isEmpty($("#connstr").val()))
+             {
+                  layer.alert("请输入SqlServer连接字符串", {
+                    skin: "layui-layer-molv", //样式类名
+                    closeBtn: 0 // 是否显示关闭按钮 0=不显示，1=显示
+                  });
+             }else
+             {
+              
+                    $.ajax({
+                    type:"POST",
+                    url:"/Home/LoadTable",
+                    contentType: "application/json", //必须这样写
+                    dataType:"json",
+                    data:'"'+$("#connstr").val()+'"',//这里是重点！用单引号包一个双引号，双引号里为字符串内容！
+                    success:function (data) {
+                         location.href="/Home/"+data.action;
+
+                         return false;
+                    },
+                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+                         alert(XMLHttpRequest.responseText);
+                             alert(XMLHttpRequest.status);  
+                       alert(XMLHttpRequest.readyState);  
+                       alert(textStatus);  
+                         return false;
+                    } 
+                  });
+
+
+                //var conndata={
+                //    "connectStr": $("#connstr").val()
+                //} 
+                // $.ajax({
+                //    type:"POST",
+                //    url:"/Home/LoadTable",
+                //    contentType: "application/json", //必须这样写
+                //    dataType:"json",
+                //    data:JSON.stringify(conndata),//conndata是你要提交是json字符串
+                //    success:function (data) {
+ 
+                //    } 
+                //})
+
+             }
+            }); 
+        });
+
+         
+        // 判断空
+		function isEmpty (val) {
+			if (typeof val == 'string') {
+				val = val.trim();
+			}
+			return !val && val!==0 && typeof val!=="boolean"?true:false;
+		}
+
+		// 判断Null
+		function isNull (val) {
+			return !val && typeof(val)!="undefined" && val!=0 ? true : false;
+		}
+    </script>
+}

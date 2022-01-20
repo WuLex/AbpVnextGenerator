@@ -1,0 +1,42 @@
+﻿using #NAMESPACE#.Application.Interfaces;
+using #NAMESPACE#.Application.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+
+namespace #NAMESPACE#.Api.Controllers
+{
+    [Route("api/[controller]/")]
+    public class #CLASSNAME#Controller : AbpController
+    {
+        private readonly I#CLASSNAME#AppService _#VARCLASSNAME#AppService;
+        public #CLASSNAME#Controller(I#CLASSNAME#AppService #VARCLASSNAME#AppService)
+        {
+            _#VARCLASSNAME#AppService = #CLASSNAME#AppService;
+        }
+
+        [HttpPost]
+        public Task<#CLASSNAME#Dto> CreateOrUpdate(CreateOrUpdate#CLASSNAME#Dto input)
+        {
+            return _#VARCLASSNAME#AppService.CreateOrUpdate(input);
+        }
+
+        [HttpPost]
+        [Route("delete")]
+        public Task Delete(List<Guid> ids)
+        {
+            return _#VARCLASSNAME#AppService.Delete(ids);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public Task<#CLASSNAME#Dto> Get(Guid id)
+        {
+            return _#VARCLASSNAME#AppService.Get(id);
+        }
+
+        [HttpGet]
+        public Task<PagedResultDto<#CLASSNAME#Dto>> GetAll(Get#CLASSNAME#InputDto input)
+        {
+            return _#VARCLASSNAME#AppService.GetAll(input);
+        }
+    }
+}

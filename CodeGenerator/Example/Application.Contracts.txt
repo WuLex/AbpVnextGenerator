@@ -1,0 +1,13 @@
+﻿using #NAMESPACE#.Application.Interfaces.Common;
+using #NAMESPACE#.Application.ViewModels;
+
+namespace #NAMESPACE#.Application.Interfaces
+{
+    public interface I#CLASSNAME#AppService : IApplicationService
+    {
+        Task<#CLASSNAME#Dto> Get(Guid id);
+        Task<PagedResultDto<#CLASSNAME#Dto>> GetAll(Get#CLASSNAME#InputDto input);
+        Task<#CLASSNAME#Dto> CreateOrUpdate(CreateOrUpdate#CLASSNAME#Dto input);
+        Task Delete(List<Guid> ids);
+    }
+}
