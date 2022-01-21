@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "layer@3.5.1",
+      "destination": "wwwroot/lib/layer",
+      "files": [
+        "layer.js",
+        "theme/default/icon-ext.png",
+        "theme/default/icon.png",
+        "theme/default/layer.css",
+        "theme/default/layer.min.css",
+        "theme/default/loading-0.gif",
+        "theme/default/loading-1.gif",
+        "theme/default/loading-2.gif",
+        "theme/moon/default.png",
+        "theme/moon/style.css",
+        "theme/moon/style.min.css",
+        "layer.min.js"
+      ]
+    }
+  ]
+}

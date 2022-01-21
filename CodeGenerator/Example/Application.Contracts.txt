@@ -1,4 +1,10 @@
-﻿using #NAMESPACE#.Application.Interfaces.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
+
+using #NAMESPACE#.Application.Interfaces.Common;
 using #NAMESPACE#.Application.ViewModels;
 
 namespace #NAMESPACE#.Application.Interfaces

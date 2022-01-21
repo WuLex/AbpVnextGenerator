@@ -1,9 +1,24 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
+using Volo.Abp.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
+
 using #NAMESPACE#.Application.Interfaces;
 using #NAMESPACE#.Application.Services.Common;
 using #NAMESPACE#.Application.ViewModels;
 using #NAMESPACE#.Domain.Entities;
 using #NAMESPACE#.Domain.Interfaces.Service;
+
+
+
+
 
 namespace #NAMESPACE#.Application.Services
 {
