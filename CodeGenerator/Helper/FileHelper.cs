@@ -47,16 +47,16 @@ namespace CodeGenerator.Helper
             regexText = new Regex("#VARCLASSNAME#");
             strContents = regexText.Replace(strContents, ToCamelCaseLoweFirst(className));
 
-            string pathToSave = Directory.GetCurrentDirectory() + @"\DownloadFiles\" +
-                                Path.GetFileNameWithoutExtension(templateFilePath).Replace(".", @"\");
+            string pathToSave = Directory.GetCurrentDirectory() + @"\ZipContainFiles\" + Path.GetFileNameWithoutExtension(templateFilePath).Replace(".", @"\");
 
             #region 生成文件规则
 
             //string filename = System.IO.Path.GetFileName(templateFilePath);//文件名  “Api.Controllers.txt”
             //string extension = System.IO.Path.GetExtension(templateFilePath);//扩展名 “.txt”
-            string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(templateFilePath);// 没有扩展名的文件名 “Api.Controllers”
+            string fileNameWithoutExtension =
+                System.IO.Path.GetFileNameWithoutExtension(templateFilePath); // 没有扩展名的文件名 “Api.Controllers”
 
-            string fileName = "nofile.txt";  //className + "." + "cs";
+            string fileName = "nofile.txt"; //className + "." + "cs";
             if (fileNameWithoutExtension.Contains("HttpApi.Controllers"))
             {
                 fileName = className + "Controller." + "cs";
@@ -88,20 +88,21 @@ namespace CodeGenerator.Helper
         /// 删除旧的压缩包文件
         /// </summary>
         /// <param name="filesNameToGenerate"></param>
-        /// <param name="downloadFilePath"></param>
-        public static void DeleteOlderFiles(List<string> filesNameToGenerate, string downloadFilePath)
+        /// <param name="filePath">zip文件/cs文件</param>
+        public static void DeleteOlderFiles(List<string> filesNameToGenerate, string filePath)
         {
             foreach (var templateFilePath in filesNameToGenerate)
             {
-                var pathFileToDelete = downloadFilePath + @"\" + Path.GetFileNameWithoutExtension(templateFilePath).Replace(".", @"\");
+                var pathFileToDelete = filePath + @"\" +
+                                       Path.GetFileNameWithoutExtension(templateFilePath).Replace(".", @"\");
                 var directoryInfo = new DirectoryInfo(pathFileToDelete);
 
-                if (!Directory.Exists(pathFileToDelete))//如果不存在就创建file文件夹　　             　　
+                if (!Directory.Exists(pathFileToDelete)) //如果不存在就创建file文件夹　　             　　
                 {
-                    Directory.CreateDirectory(pathFileToDelete);//创建该文件夹　　
+                    Directory.CreateDirectory(pathFileToDelete); //创建该文件夹　　
                 }
 
-                if (directoryInfo.GetFiles().Count() > 0)
+                if (directoryInfo.GetFiles().Any())
                 {
                     foreach (FileInfo file in directoryInfo.GetFiles())
                     {

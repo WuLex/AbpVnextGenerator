@@ -1,5 +1,6 @@
 ﻿using CodeGenerator.Common;
 using CodeGenerator.DB;
+using EntityCreater;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -17,7 +18,7 @@ namespace CodeGenerator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataDbContext>(options => options.UseSqlServer("Data Source=blog.db"));
-            
+
             services.AddControllersWithViews()
                 .AddControllersAsServices(); //将控制器添加为服务
 
@@ -27,6 +28,7 @@ namespace CodeGenerator
             //在ConfigureServices中注册缓存服务
             services.AddMemoryCache();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.TryAddScoped<CreateDefaultBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

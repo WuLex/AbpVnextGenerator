@@ -22,7 +22,8 @@ namespace CodeGenerator.DB
             }
         }
 
-        private static DbCommand CreateCommand(DatabaseFacade facade, string sql, out DbConnection dbConn, params object[] parameters)
+        private static DbCommand CreateCommand(DatabaseFacade facade, string sql, out DbConnection dbConn,
+            params object[] parameters)
         {
             DbConnection conn = facade.GetDbConnection();
             dbConn = conn;
@@ -33,6 +34,7 @@ namespace CodeGenerator.DB
                 cmd.CommandText = sql;
                 CombineParams(ref cmd, parameters);
             }
+
             return cmd;
         }
 
@@ -47,7 +49,8 @@ namespace CodeGenerator.DB
             return dt;
         }
 
-        public static IEnumerable<T> SqlQuery<T>(this DatabaseFacade facade, string sql, params object[] parameters) where T : class, new()
+        public static IEnumerable<T> SqlQuery<T>(this DatabaseFacade facade, string sql, params object[] parameters)
+            where T : class, new()
         {
             DataTable dt = SqlQuery(facade, sql, parameters);
             return dt.ToEnumerable<T>();
@@ -66,9 +69,11 @@ namespace CodeGenerator.DB
                     if (dt.Columns.IndexOf(p.Name) != -1 && row[p.Name] != DBNull.Value)
                         p.SetValue(t, row[p.Name], null);
                 }
+
                 ts[i] = t;
                 i++;
             }
+
             return ts;
         }
     }

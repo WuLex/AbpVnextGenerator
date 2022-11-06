@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CreatedZipPack\**" />
+    <Compile Remove="ZipContainFiles\**" />
+    <Content Remove="CreatedZipPack\**" />
+    <Content Remove="ZipContainFiles\**" />
+    <EmbeddedResource Remove="CreatedZipPack\**" />
+    <EmbeddedResource Remove="ZipContainFiles\**" />
+    <None Remove="CreatedZipPack\**" />
+    <None Remove="ZipContainFiles\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.15.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
@@ -18,8 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CreatedZipFile\" />
-    <Folder Include="DownloadFiles\Api\Controllers\" />
+    <ProjectReference Include="..\EntityCreater\EntityCreater.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
