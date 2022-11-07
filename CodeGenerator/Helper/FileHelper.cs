@@ -47,7 +47,8 @@ namespace CodeGenerator.Helper
             regexText = new Regex("#VARCLASSNAME#");
             strContents = regexText.Replace(strContents, ToCamelCaseLoweFirst(className));
 
-            string pathToSave = Directory.GetCurrentDirectory() + @"\ZipContainFiles\" + Path.GetFileNameWithoutExtension(templateFilePath).Replace(".", @"\");
+            string pathToSave = Directory.GetCurrentDirectory() + @"\ZipContainFiles\" +
+                                Path.GetFileNameWithoutExtension(templateFilePath).Replace(".", @"\");
 
             #region 生成文件规则
 
@@ -68,6 +69,14 @@ namespace CodeGenerator.Helper
             else if (fileNameWithoutExtension.Contains("Application.Services"))
             {
                 fileName = className + "AppService." + "cs";
+            }
+            else if (fileNameWithoutExtension.Contains("Domain.IRepository"))
+            {
+                fileName = className + "IRepository." + "cs";
+            }
+            else if (fileNameWithoutExtension.Contains("Domain.Repository"))
+            {
+                fileName = className + "Repository." + "cs";
             }
 
             #endregion 生成文件规则

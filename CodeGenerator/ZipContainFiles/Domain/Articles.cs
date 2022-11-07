@@ -18,7 +18,7 @@ namespace Blog
         /// <summary>
         /// 
         /// </summary>
-        public Bool IsTop { get; set; }
+        public bool IsTop { get; set; }
 
         /// <summary>
         /// 
@@ -38,7 +38,7 @@ namespace Blog
         /// <summary>
         /// 
         /// </summary>
-        public Bool IsDel { get; set; }
+        public bool IsDel { get; set; }
 
         /// <summary>
         /// 

@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Volo.Abp.Domain.Repositories;
+
+namespace #NAMESPACE#.Domain.IRepository
+{
+    //自定义#CLASSNAME#仓储接口,不一定要使用
+    public interface I#CLASSNAME#Repository : IRepository<#CLASSNAME#, Guid>
+    {
+        Task<#CLASSNAME#> FindByNameAsync(string name);
+
+        Task<List<#CLASSNAME#>> GetListAsync(
+            int skipCount,
+            int maxResultCount,
+            string sorting,
+            string filter = null
+        );
+    }
+}

@@ -23,7 +23,7 @@ namespace Blog
         /// <summary>
         /// 
         /// </summary>
-        public Bool IsTop { get; set; }
+        public bool IsTop { get; set; }
 
         /// <summary>
         /// 

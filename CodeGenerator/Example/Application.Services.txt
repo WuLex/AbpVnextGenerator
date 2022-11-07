@@ -18,13 +18,11 @@ using #NAMESPACE#.Domain.Interfaces.Service;
 
 
 
-
-
 namespace #NAMESPACE#.Application.Services
 {
     public class #CLASSNAME#AppService : ApplicationService,I#CLASSNAME#AppService
     {
-        
+        //通用(泛型)仓储,IRepository<TEntity, TKey> 使用标准的CRUD操作
         private readonly IRepository<#CLASSNAME#, Guid> _#VARCLASSNAME#Repository;
 
         public #CLASSNAME#AppService(
