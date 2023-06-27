@@ -13,6 +13,9 @@ using EntityCreater.AddDatabase.SqlServer.BLL;
 
 namespace CodeGenerator.Controllers
 {
+    /// <summary>
+    /// 代码生成器实现方式一
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

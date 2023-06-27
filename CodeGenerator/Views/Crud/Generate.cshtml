@@ -1,0 +1,14 @@
+﻿@model string
+
+<form method="post" asp-action="Generate">
+    <div class="form-group">
+        <label for="tableName">Table Name</label>
+        <input type="text" name="tableName" class="form-control" id="tableName" placeholder="Enter table name"
+    </div>
+    <button type="submit" class="btn btn-primary">Generate</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model))
+{
+    <div class="alert alert-success mt-3">@Model</div>
+}

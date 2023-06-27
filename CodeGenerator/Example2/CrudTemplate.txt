@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MyProject.Domain.Entities;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
+using Volo.Abp.Domain.Repositories;
+
+namespace {NAMESPACE}
+{
+    public class {ENTITY}AppService : {BASEAPP}<{ENTITY}, {IDTO}, {CREATEINPUT}, {UPDATEINPUT}, {GETLISTINPUT}>,
+        I{ENTITY}AppService
+    {
+        public {ENTITY}AppService(I{ENTITY}Repository repository) : base(repository)
+        {
+        }
+
+        public async Task<{DTO}> CreateAsync({CREATEINPUT} input)
+        {
+            var {ENTITY} = ObjectMapper.Map<{CREATEINPUT}, {ENTITY}>(input);
+
+            {ENTITY} = await Repository.InsertAsync({ENTITY});
+
+            return ObjectMapper.Map<{ENTITY}, {DTO}>({ENTITY});
+        }
+
+        public async Task<{DTO}> GetAsync({ID} id)
+        {
+            var {ENTITY} = await Repository.GetAsync(id);
+
+            return ObjectMapper.Map<{ENTITY}, {DTO}>({ENTITY});
+        }
+
+        public async Task<PagedResultDto<{DTO}>> GetListAsync({GETLISTINPUT} input)
+        {
+            if (input.Sorting.IsNullOrWhiteSpace())
+            {
+                input.Sorting = nameof({DTO}.Name);
+            }
+
+            var {ENTITY}Count = await Repository.GetCountAsync(input.Filter);
+
+            var {ENTITY}List = await Repository.GetListAsync(
+                input.SkipCount,
+                input.MaxResultCount,
+                input.Sorting,
+                input.Filter
+            );
+
+            var {DTO}List = ObjectMapper.Map<List<{ENTITY}>, List<{DTO}>>({ENTITY}List);
+
+            return new PagedResultDto<{DTO}>( {ENTITY}Count, {DTO}List);
+        }
+
+        public async Task<{DTO}> UpdateAsync({ID} id, {UPDATEINPUT} input)
+        {
+            var {ENTITY} = await Repository.GetAsync(id);
+
+            ObjectMapper.Map(input, {ENTITY});
+
+            {ENTITY} = await Repository.UpdateAsync({ENTITY});
+
+            return ObjectMapper.Map<{ENTITY}, {DTO}>({ENTITY});
+        }
+
+        public async Task DeleteAsync({ID} id)
+        {
+            await Repository.DeleteAsync(id);
+        }
+    }
+}

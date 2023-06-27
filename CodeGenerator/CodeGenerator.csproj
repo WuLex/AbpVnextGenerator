@@ -32,6 +32,10 @@
     <ProjectReference Include="..\EntityCreater\EntityCreater.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Example2\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

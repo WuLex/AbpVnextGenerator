@@ -102,7 +102,14 @@ namespace CodeGenerator
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                  name: "crud",
+                  pattern: "crud/{tableName}",
+                  defaults: new { controller = "Crud", action = "Generate" });
             });
+
+
         }
     }
 }
